@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Event Manager</h1>
+    </header>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="create-event.html">Create Event</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Upcoming Events</h2>
+        <div class="events" id="eventsContainer">
+            <!-- Events will be loaded here via JavaScript -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/events');
+                const events = await response.json();
+
+                const eventsContainer = document.getElementById('eventsContainer');
+
+                events.forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.className = 'event';
+
+                    eventElement.innerHTML = `
+                        <img src="/uploads/${event.image.fileName}" alt="${event.title}" class="event-image">
+                        <h3>${event.title}</h3>
+                        <p>${event.description}</p>
+                        <p><strong>Date:</strong> ${new Date(event.date).toLocaleDateString()}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p><strong>Max Attendees:</strong> ${event.maxAttendees}</p>
+                    `;
+
+                    eventsContainer.appendChild(eventElement);
+                });
+            } catch (error) {
+                console.error('Error loading events:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

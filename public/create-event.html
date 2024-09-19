@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Create Event</h1>
+    </header>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="create-event.html">Create Event</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+    </nav>
+    <div class="container">
+        <form action="/api/events" method="POST" enctype="multipart/form-data">
+            <h2>Create Event</h2>
+            <input type="text" name="title" placeholder="Event Title" required>
+            <textarea name="description" placeholder="Event Description" required></textarea>
+            <input type="date" name="date" required>
+            <input type="text" name="location" placeholder="Event Location" required>
+            <input type="number" name="maxAttendees" placeholder="Max Attendees" required>
+            <input type="file" name="image" required>
+            <input type="text" name="attendees" placeholder="Attendees (comma separated)">
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+    <script src="js/create-event.js"></script> <!-- Include your JavaScript file here -->
+</body>
+
+</html>
